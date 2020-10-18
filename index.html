@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Grand Canyon National Park, Arizona</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link rel='icon' href='https://newmapsplus.github.io/favicon.ico' type='image/x-icon' />
+  <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Monda" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Cabin|Roboto:400,700|Roboto+Condensed:400,700" rel="stylesheet">
+  <style>
+    /* CSS for styles go here */
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      font-family: 'Monda', Sans-Serif;
+      font-weight: 300;
+      color: #3d3d3d;
+      font-size: 100%;
+    }
+
+    section,
+    footer,
+    header {
+      width: 80%;
+      margin: 10px auto;
+    }
+
+    h1 {
+      font-family: 'Julius Sans One', Sans-Serif;
+      font-size: 2em;
+      font-weight: 900i;
+      letter-spacing: .04em;
+    }
+
+    h2 {
+      font-family: 'Julius Sans One', Sans-Serif;
+      font-size: 1.5em;
+      font-weight: 300;
+      letter-spacing: .04em;
+    }
+
+    p {
+      font-size: 1.0em;
+      line-height: 1.5em;
+    }
+
+    a {
+      color: #8A2BE2;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    a:hover {
+      Color: hotpink;
+      text-decoration: underline;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
+      margin: 10px 0;
+    }
+
+    hr {
+      margin: 20px 0;
+      border: 0;
+      height: 1px;
+      background: #d3d3d3;
+    }
+
+    .caption {
+      margin: 0 0 20px 0;
+      display: block;
+      text-align: center;
+      font-size: 0.8em;
+    }
+
+    .imagechange {
+      text-align: center;
+      font-size: 0.75em;
+      margin: 20px 0 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 540px;
+      margin: 10px auto;
+      border: 2px solid #d3d3d3;
+    }
+
+    .highlight {
+      color: #f05716;
+      font-weight: bold;
+    }
+
+    .img-fill {
+      width: 100%;
+      height: auto;
+      margin: 10px 0;
+    }
+
+    /* Use float property to make two-column layout */
+    .first-column {
+      float: left;
+      width: 49%;
+      padding-right: 2%;
+    }
+
+    .second-column {
+      float: left;
+      width: 49%;
+    }
+
+    /* Clear floats after columns */
+    .row::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    @media screen and (max-width: 900px) {
+
+      .first-column,
+      .second-column {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HTML for page structure goes here-->
+  <header>
+    <h1>Next Vacation - Grand Canyon National Park</h1>
+  </header>
+  <section>
+    <div id="map"></div>
+    <!-- Start row -->
+    <div class="row">
+
+      <!-- Start left column -->
+      <div class="first-column">
+        <h2>Grand Canyon National Park, Arizona</h2>
+        <p>My next vacation will be to Grand Canyon National Park. This has been a bucket list item for me. I also have a close friend that just moved to Arizona and plan on traveling with them and catching up. On this trip we plan to visit the Grand
+          Canyon and hike several day trails and take in the scenery. We have talked about the potential of white water rafting, but I am a bit of a weenie when it comes to water.</p>
+        <ul>
+          <li>See NMP projects on GitHub: <a href="https://github.com/newmapsplus">New Maps Plus</a></li>
+          <li>Follow NMP on twitter: <a href="https://twitter.com/NewMapsPlus">@NewMapsPlus</a></li>
+        </ul>
+
+        <!-- End first column -->
+      </div>
+
+      <!-- Start right column -->
+      <div class="second-column">
+        <div class="imagechange">When you click the picture the image will change
+        </div>
+        <img id='canyon' src="https://nthp-savingplaces.s3.amazonaws.com/2016/08/18/14/49/49/810/GC_confluence_kcaldon_GrandCanyonTrust.jpg" alt="Lexington and UK Campus, 1996" class="img-fill">
+        <div id='caption' class="caption">
+          Grand Canyon National Park, Arizona. Photo from <a href="https://savingplaces.org/places/grand-canyon#.W8VE-WhKg2w">National Trust for Historic Preservtion</a>.
+        </div>
+        <!-- End right column -->
+      </div>
+
+      <!-- End row column -->
+    </div>
+
+  </section>
+  <footer>
+    <hr>
+    <a href="https://newmapsplus.github.io">
+      <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-nmp-75px-h-gray.png" alt="University of Kentucky New Maps Plus">
+    </a>
+
+    <a href="https://uky-gis.github.io">
+      <img src="https://newmapsplus.github.io/assets/graphics/logo-2018-geography-75px-h.png" alt="University of Kentucky Department of Geography">
+    </a>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.4/leaflet.js"></script>
+  <script>
+    // JavaScript for controlling behavior and interactivity goes here
+    var map = document.getElementById('map');
+    map.style.background = '#4d4a9f';
+    console.log("hello map");
+    var options = {
+      center: [36.056595, -112.125092],
+      zoom: 8
+    }
+
+    var map = L.map('map', options);
+
+    var basemap_url = 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'
+
+    var basemap_attributes = {
+      maxZoom: 17,
+      attribution: 'Map data: &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+    }
+
+    var tiles = L.tileLayer(basemap_url, basemap_attributes).addTo(map);
+
+    var message = 'Grand Canyon National Park';
+
+    L.marker(map.getCenter())
+      .bindTooltip(message)
+      .addTo(map)
+      .openTooltip();
+
+    var basemap_url = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+
+    // You'll need to create an id for your photograph
+    var click_photo = document.getElementById('canyon')
+
+    // Select an amusing photo to swap out and update caption
+    click_photo.addEventListener('click', function() {
+      if (this.src.includes('GC_confluence_kcaldon_GrandCanyonTrust.jpg')) {
+        this.alt= "Use an alt property for screen readers and document search engine indexing."
+        this.src = "https://www.grandcanyonwhitewater.com/wp-content/uploads/2019/10/180519-5DL-Kent-Warlick-131-rapid-motor-boat.jpg";
+        document.querySelector('.caption').innerHTML =
+        'Motor boat going through a Grand Canyon Rapid. Picture from <a href=https://www.grandcanyonwhitewater.com/grand-canyon-rapids-river-mile/> Grand Canyon Rapids Blog.</a>' // what other attributes can your change?
+
+      } else {
+        this.src = "https://nthp-savingplaces.s3.amazonaws.com/2016/08/18/14/49/49/810/GC_confluence_kcaldon_GrandCanyonTrust.jpg";
+        this.alt= "Use an alt property for screen readers and document search engine indexing."
+        document.querySelector('.caption').innerHTML =
+        'Grand Canyon National Park, Arizona. Photo from <a href="https://savingplaces.org/places/grand-canyon#.W8VE-WhKg2w">National Trust for Historic Preservtion</a>' // what other attributes can your change?
+      }
+      
+    });
+  </script>
+
+</body>
+
+</html>
